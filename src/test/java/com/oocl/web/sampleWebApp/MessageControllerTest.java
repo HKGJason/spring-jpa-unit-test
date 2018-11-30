@@ -27,9 +27,12 @@ public class MessageControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private SingleEntityRepository singleEntityRepository;
+
     @Test
     public void testReturnStatus() throws Exception{
-        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.get("message")).andReturn();
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.get("/message")).andReturn();
 
         final MockHttpServletResponse response = result.getResponse();
 
@@ -44,6 +47,23 @@ public class MessageControllerTest {
         final MessageResponse messageResponse = mapper.readValue(json, MessageResponse.class);
 
         assertEquals("Hi", messageResponse.getMsg());
+    }
+
+    @Test
+    public void should_get_entity_name_message() throws Exception{
+        SingleEntity entity = new SingleEntity();
+        entity.setId(2L);
+        entity.setName("testRepo");
+        singleEntityRepository.save(entity);
+        singleEntityRepository.flush();
+        MvcResult result = this.mockMvc.perform(get("/singleentity")).andReturn();
+
+        final String json = result.getResponse().getContentAsString();
+        final ObjectMapper mapper = new ObjectMapper();
+        final SingleEntity singleEntity = mapper.readValue(json, SingleEntity.class);
+
+        assertEquals("testRepo", singleEntity.getName());
+
     }
 
 }

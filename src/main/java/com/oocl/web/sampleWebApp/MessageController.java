@@ -12,11 +12,17 @@ public class MessageController {
     @Autowired
     public MessageController(){
     }
+    @Autowired
+    private SingleEntityRepository singleEntityRepository;
 
-    @GetMapping
+    @GetMapping(value = "/message")
     public ResponseEntity<MessageResponse> get(){
         return new ResponseEntity<>(new MessageResponse("Hi"), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/singleentity")
+    public SingleEntity getEntity(){
+        return singleEntityRepository.findAll().get(0);
+    }
 }
 
