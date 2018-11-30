@@ -21,8 +21,9 @@ public class MessageController {
     }
 
     @GetMapping(value = "/singleentity")
-    public SingleEntity getEntity(){
-        return singleEntityRepository.findAll().get(0);
+    public MessageResponse getEntity(){
+        SingleEntity entity = singleEntityRepository.findAll().get(0);
+        return new MessageResponse(entity.getName());
     }
 }
 

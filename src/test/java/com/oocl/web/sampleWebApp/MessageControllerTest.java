@@ -60,9 +60,9 @@ public class MessageControllerTest {
 
         final String json = result.getResponse().getContentAsString();
         final ObjectMapper mapper = new ObjectMapper();
-        final SingleEntity singleEntity = mapper.readValue(json, SingleEntity.class);
+        final MessageResponse messageResponse = mapper.readValue(json, MessageResponse.class);
 
-        assertEquals("testRepo", singleEntity.getName());
+        assertEquals("testRepo", messageResponse.getMsg());
 
     }
 
