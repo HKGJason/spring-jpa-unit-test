@@ -1,5 +1,8 @@
 package com.oocl.web.sampleWebApp;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,6 +10,8 @@ import javax.persistence.Id;
 public class SingleEntity {
     @Id
     private Long id;
+
+    @Column(length = 10)
     private String name;
 
 
