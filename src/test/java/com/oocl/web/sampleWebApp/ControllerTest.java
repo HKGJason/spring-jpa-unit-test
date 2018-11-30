@@ -1,5 +1,6 @@
 package com.oocl.web.sampleWebApp;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +34,16 @@ public class ControllerTest {
         final MockHttpServletResponse response = result.getResponse();
 
         assertEquals(200, response.getStatus());
+    }
+    @Test
+    public void testReturnMessage() throws Exception{
+        MvcResult result = this.mockMvc.perform(get("/message")).andReturn();
+
+        final String json = result.getResponse().getContentAsString();
+        final ObjectMapper mapper = new ObjectMapper();
+        final MessageResponse messageResponse = mapper.readValue(json, MessageResponse.class);
+
+        assertEquals("Hi", messageResponse.getMsg());
     }
 
 }

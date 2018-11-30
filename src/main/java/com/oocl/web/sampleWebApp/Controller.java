@@ -3,17 +3,16 @@ package com.oocl.web.sampleWebApp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sun.plugin2.message.Message;
 
 @RestController
 public class Controller {
-    SingleEntityService singleEntityService;
     @Autowired
-    public Controller(SingleEntityService singleEntityService){
-        this.singleEntityService = singleEntityService;
+    public Controller(){
     }
     @GetMapping
-    String getCompanyByIndex(){
-        return "Hi";
+    public MessageResponse getCompanyByIndex(){
+        return new MessageResponse("Hi");
     }
 
 }
