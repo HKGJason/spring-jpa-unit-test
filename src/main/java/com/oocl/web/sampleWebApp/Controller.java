@@ -11,7 +11,7 @@ public class Controller {
     public Controller(){
     }
     @GetMapping
-    public MessageResponse getCompanyByIndex(){
+    public MessageResponse get(){
         return new MessageResponse("Hi");
     }
 
